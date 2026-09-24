@@ -1,0 +1,13 @@
+table { width: 100%; border-collapse: collapse; background: var(--superficie); }
+th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--borda); vertical-align: middle; }
+thead th { background: var(--topo); }
+tbody tr:hover { background: var(--fundo); }
+img { width: 44px; height: 44px; object-fit: contain; }
+.qtd { display: inline-block; min-width: 1.0em; text-align: center; padding: 10px 10px;
+       border-radius: 999px; font-weight: 300; margin-right: 8px;
+       background: var(--ok-fundo); color: var(--ok-texto); }
+.baixo { background: var(--aviso-fundo); color: var(--aviso-texto); }
+.esgotado { background: var(--erro-fundo); color: var(--erro-texto); }
+small { color: var(--texto-suave); }
+a { color: var(--destaque); }
+.erro { color: var(--erro-texto); }

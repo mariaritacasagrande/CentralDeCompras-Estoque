@@ -1,0 +1,43 @@
+<h1>Estoque</h1>
+
+@if (estoque.carregando()) {
+  <p>Carregando produtos...</p>
+} @else if (estoque.erro()) {
+  <p class="erro">Não foi possível carregar os produtos. Tente novamente mais tarde.</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Produto</th>
+        <th>Categoria</th>
+        <th>Em estoque</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of estoque.itens(); track item.produto.id) {
+        <tr>
+          <td><img [src]="item.produto.image" [alt]="item.produto.title" /></td>
+          <td>{{ item.produto.title }}</td>
+          <td>{{ item.produto.category }}</td>
+          <td>
+            <span class="qtd"
+              [class.esgotado]="item.quantidade === 0"
+              [class.baixo]="item.quantidade > 0 && item.quantidade < 5">
+              {{ item.quantidade }}
+            </span>
+            @if (item.quantidade === 0) {
+              <small>Esgotado</small>
+            } @else if (item.quantidade < 5) {
+              <small>Estoque baixo</small>
+            }
+          </td>
+          <td>
+            <a [routerLink]="['/repor']" [queryParams]="{ produto: item.produto.id }">Repor</a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

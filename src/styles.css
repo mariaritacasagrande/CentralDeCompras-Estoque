@@ -1,19 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --fundo: #f7fbf8;
+  --fundo: #ffffff;
   --superficie: #ffffff;
-  --topo: #e3f2ea;
-  --borda: #d3e6db;
+  --topo: #2b00e9;
+  --borda: #1100c7;
 
-  --texto: #2f4a3f;
-  --texto-suave: #5f7a6e;
+  --texto: #00158f;
+  --texto-suave: #2b3a9d;
 
   --primaria: #9fd4bb;
   --primaria-forte: #82c4a5;
-  --destaque: #2f7d5b;
+  --destaque: #170046;
 
-  --ok-fundo: #d8f0e2;
-  --ok-texto: #276a47;
+  --ok-fundo: #95b4d5;
+  --ok-texto: #120054;
   --aviso-fundo: #ffe6d2;
   --aviso-texto: #8a4b12;
   --erro-fundo: #fde0e4;
@@ -24,5 +24,5 @@ body {
   margin: 0;
   background: var(--fundo);
   color: var(--texto);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Ubuntu, Helvetica, sans-serif;
 }
