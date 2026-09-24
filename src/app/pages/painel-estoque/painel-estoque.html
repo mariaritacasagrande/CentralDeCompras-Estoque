@@ -33,9 +33,11 @@
               <small>Estoque baixo</small>
             }
           </td>
-          <td>
-            <a [routerLink]="['/repor']" [queryParams]="{ produto: item.produto.id }">Repor</a>
-          </td>
+        <td>
+      <button (click)="reporEstoque(item)" class="btn-repor">
+        Repor
+      </button>
+    </td>
         </tr>
       }
     </tbody>
