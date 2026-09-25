@@ -11,3 +11,23 @@ img { width: 44px; height: 44px; object-fit: contain; }
 small { color: var(--texto-suave); }
 a { color: var(--destaque); }
 .erro { color: var(--erro-texto); }
+.btn-repor { padding: 8px 14px; border: 0; border-radius: 6px;
+             background: var(--primaria); color: var(--texto); font: inherit;
+             font-weight: 600; cursor: pointer; }
+.btn-repor:hover { background: var(--primaria-forte); }
+.btn-repor:focus-visible { outline: 2px solid var(--destaque); outline-offset: 2px; }
+.modal-fundo { position: fixed; inset: 0; display: grid; place-items: center;
+               padding: 20px; background: rgb(0 0 0 / 35%); }
+.modal-repor { width: min(100%, 400px); padding: 22px; border: 1px solid var(--borda);
+               border-radius: 12px; background: var(--superficie); box-shadow: 0 10px 30px rgb(0 0 0 / 20%); }
+.modal-repor h2 { margin: 0 0 8px; }
+.modal-repor p { margin: 0 0 14px; }
+.modal-repor input { width: 100%; box-sizing: border-box; padding: 10px;
+                     border: 1px solid var(--borda); border-radius: 6px; font: inherit; }
+.modal-repor input:focus { outline: 2px solid var(--primaria); border-color: var(--primaria); }
+.acoes-modal { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+.acoes-modal button { padding: 8px 14px; border: 0; border-radius: 6px; font: inherit;
+                      font-weight: 600; cursor: pointer; }
+.btn-cancelar { background: var(--fundo); color: var(--texto); }
+.btn-confirmar { background: var(--primaria); color: var(--texto); }
+.btn-cancelar:hover, .btn-confirmar:hover { filter: brightness(0.95); }
