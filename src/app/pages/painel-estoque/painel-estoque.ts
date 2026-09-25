@@ -11,21 +11,31 @@ import { ItemEstoque } from '../../models/produto.model';
 })
 export class PainelEstoque implements OnInit {
   estoque = inject(EstoqueService);
+  itemParaRepor: ItemEstoque | null = null;
+  erroReposicao = '';
 
   ngOnInit(): void {
     this.estoque.carregar();
   }
-reporEstoque(item: ItemEstoque): void {
-    const qteStr = prompt(`Quantas unidades deseja adicionar a "${item.produto.title}"?`);
-    
-    if (qteStr !== null) {
-      const quantidade = Number(qteStr);
-      
-      if (!isNaN(quantidade) && quantidade > 0) {
-        this.estoque.repor(item.produto.id, quantidade);
-      } else {
-        alert('Por favor, informe uma quantidade válida.');
-      }
+  reporEstoque(item: ItemEstoque): void {
+    this.itemParaRepor = item;
+    this.erroReposicao = '';
+  }
+
+  cancelarReposicao(): void {
+    this.itemParaRepor = null;
+    this.erroReposicao = '';
+  }
+
+  confirmarReposicao(valor: string): void {
+    const quantidade = Number(valor);
+
+    if (!Number.isInteger(quantidade) || quantidade <= 0) {
+      this.erroReposicao = 'Informe uma quantidade inteira maior que zero.';
+      return;
     }
+
+    this.estoque.repor(this.itemParaRepor!.produto.id, quantidade);
+    this.cancelarReposicao();
   }
 }

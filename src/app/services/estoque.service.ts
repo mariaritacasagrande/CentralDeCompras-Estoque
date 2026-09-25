@@ -4,6 +4,7 @@ import { ProdutoService } from './produto.service';
 
 @Injectable({ providedIn: 'root' })
 export class EstoqueService {
+  private readonly chavePersistencia = 'central-compras-estoque';
   private produtoService = inject(ProdutoService);
 
   private _itens = signal<ItemEstoque[]>([]);
@@ -26,10 +27,12 @@ export class EstoqueService {
 
     this.produtoService.listar().subscribe({
       next: (produtos) => {
+        const quantidadesSalvas = this.lerQuantidadesSalvas();
+
         this._itens.set(
           produtos.map((produto) => ({
             produto,
-            quantidade: (produto.id * 7) % 20,
+            quantidade: quantidadesSalvas[produto.id] ?? (produto.id * 7) % 20,
           }))
         );
         this.carregando.set(false);
@@ -46,12 +49,32 @@ export class EstoqueService {
   }
 
   repor(id: number, quantidade: number): void {
-    this._itens.update((lista) =>
-      lista.map((item) =>
+    this._itens.update((lista) => {
+      const novaLista = lista.map((item) =>
         item.produto.id === id
           ? { ...item, quantidade: item.quantidade + quantidade }
           : item
-      )
-    );
+      );
+
+      this.salvarQuantidades(novaLista);
+      return novaLista;
+    });
+  }
+
+  private lerQuantidadesSalvas(): Record<number, number> {
+    try {
+      return JSON.parse(localStorage.getItem(this.chavePersistencia) ?? '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  private salvarQuantidades(itens: ItemEstoque[]): void {
+    const quantidades = itens.reduce<Record<number, number>>((resultado, item) => {
+      resultado[item.produto.id] = item.quantidade;
+      return resultado;
+    }, {});
+
+    localStorage.setItem(this.chavePersistencia, JSON.stringify(quantidades));
   }
 }

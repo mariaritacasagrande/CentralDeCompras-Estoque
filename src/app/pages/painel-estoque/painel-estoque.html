@@ -43,3 +43,23 @@
     </tbody>
   </table>
 }
+
+@if (itemParaRepor; as item) {
+  <div class="modal-fundo" role="presentation" (click)="cancelarReposicao()">
+    <section class="modal-repor" role="dialog" aria-modal="true" aria-labelledby="titulo-repor"
+      (click)="$event.stopPropagation()">
+      <h2 id="titulo-repor">Repor estoque</h2>
+      <p>Quantas unidades deseja adicionar a <strong>{{ item.produto.title }}</strong>?</p>
+      <input #quantidadeInput type="number" min="1" step="1" autofocus aria-label="Quantidade"
+        (keyup.enter)="confirmarReposicao(quantidadeInput.value)" />
+      @if (erroReposicao) {
+        <small class="erro">{{ erroReposicao }}</small>
+      }
+      <div class="acoes-modal">
+        <button type="button" class="btn-cancelar" (click)="cancelarReposicao()">Cancelar</button>
+        <button type="button" class="btn-confirmar"
+          (click)="confirmarReposicao(quantidadeInput.value)">Repor</button>
+      </div>
+    </section>
+  </div>
+}
